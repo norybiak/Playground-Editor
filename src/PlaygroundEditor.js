@@ -1,7 +1,7 @@
 /**
  * PlaygroundEditor
  * A tool to help create awesome playground rooms for Altspace
- * V 0.1.0
+ * V 0.2.0
  * 
  * @Author NorybiaK
  */
