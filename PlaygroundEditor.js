@@ -239,7 +239,7 @@ var PlaygroundEditor = PlaygroundEditor || {};
 
 		var s = res.split('-');
 	
-		var dimensions = {w: 0.5, h: 0.5, l: 0.5};
+		var demensions = {w: 0.5, h: 0.5, l: 0.5};
 		
 		for (var i = 0; i < s.length; i++)
 		{
@@ -249,25 +249,25 @@ var PlaygroundEditor = PlaygroundEditor || {};
 				switch (s[i][1])
 				{
 					case 'r':
-						dimensions.w = parseInt(s[i][0]);
-						dimensions.l = parseInt(s[i][0]);
+						demensions.w = parseInt(s[i][0]);
+						demensions.l = parseInt(s[i][0]);
 						break;
 						
 					case 'd':
-						dimensions.w = parseInt(s[i][0]);
-						dimensions.h = parseInt(s[i][0]);
+						demensions.w = parseInt(s[i][0]);
+						demensions.h = parseInt(s[i][0]);
 						break;
 						
 					case 'w':
-						dimensions.w = parseInt(s[i][0]);
+						demensions.w = parseInt(s[i][0]);
 						break;
 						
 					case 'h':
-						dimensions.h = parseInt(s[i][0]);
+						demensions.h = parseInt(s[i][0]);
 						break;
 
 					case 'l':
-						dimensions.l = parseInt(s[i][0]);
+						demensions.l = parseInt(s[i][0]);
 						break;							
 				}	
 			}
@@ -278,7 +278,7 @@ var PlaygroundEditor = PlaygroundEditor || {};
 			type = s[0];
 		}
 			
-		selectedNative = {path: path, res: res, type: type, dimensions: dimensions};
+		selectedNative = {path: path, res: res, type: type, demensions: demensions};
 		
 		main.clearSelectBox();
 		
@@ -286,12 +286,12 @@ var PlaygroundEditor = PlaygroundEditor || {};
 		switch (type)
 		{
 			case 'ceiling':
-				dimensions.h = 0.25;
+				demensions.h = 0.25;
 				useBox = true;
 				break;
 				
 			case 'floor':
-				dimensions.h = 0.25;
+				demensions.h = 0.25;
 				useBox = true;
 				break;
 				
@@ -300,9 +300,9 @@ var PlaygroundEditor = PlaygroundEditor || {};
 				break;
 				
 			case 'pipe':
-				var l = selectedNative.dimensions.l;
-				dimensions.l = selectedNative.dimensions.w;
-				dimensions.w = l;
+				var l = selectedNative.demensions.l;
+				demensions.l = selectedNative.demensions.w;
+				demensions.w = l;
 				break;
 							
 			case 'effects':
@@ -316,7 +316,7 @@ var PlaygroundEditor = PlaygroundEditor || {};
 	
 		if (useBox)
 		{
-			var geometry = new THREE.BoxGeometry(dimensions.l, dimensions.h, dimensions.w);
+			var geometry = new THREE.BoxGeometry(demensions.l, demensions.h, demensions.w);
 			selectBox = new THREE.Mesh(geometry, new THREE.MeshBasicMaterial({color:'#FF0000', transparent: true, opacity: 0.3}));	
 			selectBox.scale.set(1, 1 , 1);
 			selectBox.position.set(0,0,0);
@@ -519,6 +519,7 @@ var PlaygroundEditor = PlaygroundEditor || {};
 				}
 				
 				/*
+
 				if ((pos.z + selectedObject.boundingBox.min.z) < (-enclosure.innerDepth / 2) + 5 || (pos.z - selectedObject.boundingBox.max.z) < (-enclosure.innerDepth / 2) + 5)
 				{
 					pos.z = ((-enclosure.innerDepth / 2) + 5) - selectedObject.boundingBox.min.z;
@@ -1395,7 +1396,7 @@ var PlaygroundEditor = PlaygroundEditor || {};
 		var s = name.split('-');
 		name.length - 1;
 		
-		var dimensions = {w: 0, h: 1, l: 0};
+		var demensions = {w: 0, h: 1, l: 0};
 		
 		for (var i = 0; i < s.length-1; i++)
 		{
@@ -1405,25 +1406,25 @@ var PlaygroundEditor = PlaygroundEditor || {};
 				switch (s[i][1])
 				{
 					case 'r':
-						dimensions.w = parseInt(s[i][0]);
-						dimensions.l = parseInt(s[i][0]);
+						demensions.w = parseInt(s[i][0]);
+						demensions.l = parseInt(s[i][0]);
 						break;
 						
 					case 'd':
-						dimensions.w = parseInt(s[i][0]);
-						dimensions.h = parseInt(s[i][0]);
+						demensions.w = parseInt(s[i][0]);
+						demensions.h = parseInt(s[i][0]);
 						break;
 						
 					case 'w':
-						dimensions.w = parseInt(s[i][0]);
+						demensions.w = parseInt(s[i][0]);
 						break;
 						
 					case 'h':
-						dimensions.h = parseInt(s[i][0]);
+						demensions.h = parseInt(s[i][0]);
 						break;
 
 					case 'l':
-						dimensions.l = parseInt(s[i][0]);
+						demensions.l = parseInt(s[i][0]);
 						break;							
 				}	
 			}
@@ -1433,18 +1434,18 @@ var PlaygroundEditor = PlaygroundEditor || {};
 		switch (s[0])
 		{
 			case 'pipe':
-				var l = dimensions.l;
-				dimensions.l = (dimensions.w);
-				dimensions.w = -(l);
+				var l = demensions.l;
+				demensions.l = (demensions.w);
+				demensions.w = -(l);
 				break;
 			
 			//This is here because some assets (curves) are weird.
 			default:
-				dimensions.l = -(dimensions.l);
+				demensions.l = -(demensions.l);
 				break;
 		}
 	
-		text.position.set((dimensions.l / 2), (dimensions.h + 1), (dimensions.w / 2));
+		text.position.set((demensions.l / 2), (demensions.h + 1), (demensions.w / 2));
 		
 		altspace.addNativeComponent(text, 'n-billboard');
 					
